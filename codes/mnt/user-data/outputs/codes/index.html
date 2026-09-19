@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codes — Idiots With Knifes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0a0a;
+    --white: #f0f0f0;
+    --grey: #888;
+    --grey-dark: #444;
+    --red: #e00;
+    --border: #2a2a2a;
+    --card: #141414;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a{ color: inherit; }
+  :focus-visible{ outline: 2px solid var(--white); outline-offset: 3px; }
+  .wrap{ max-width: 620px; margin: 0 auto; padding: 0 24px; }
+
+  .nav{
+    border-bottom: 1px solid var(--border);
+    padding: 18px 24px;
+  }
+  .nav .wrap{
+    max-width: 980px;
+    display:flex; align-items:center; justify-content: space-between;
+  }
+  .nav-brand{
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav-brand span{ color: var(--red); }
+  .nav a.back{
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+  }
+  .nav a.back:hover{ color: var(--white); }
+
+  main{
+    flex: 1;
+    display:flex;
+    align-items:center;
+    padding: 60px 24px;
+  }
+  .codes-inner{ text-align:center; width:100%; }
+  h1{
+    font-family:'Permanent Marker', cursive;
+    font-weight:400;
+    font-size: clamp(2rem, 7vw, 3rem);
+    margin: 0 0 12px;
+  }
+  #codes-sub{
+    color: var(--grey);
+    font-size: 0.85rem;
+    margin: 0 0 36px;
+  }
+  .code-box{
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 28px 20px;
+    font-size: clamp(1.1rem, 4vw, 1.6rem);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    word-break: break-word;
+    margin-bottom: 24px;
+  }
+  .code-box.unavailable{
+    color: var(--grey);
+    border-color: var(--red);
+  }
+  .reroll-btn{
+    background: none;
+    border: 1px solid var(--grey-dark);
+    color: var(--grey);
+    font-family: inherit;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .reroll-btn:hover{ border-color: var(--white); color: var(--white); }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="wrap">
+      <a class="nav-brand" href="/"><img src="/PFP.png" alt="" style="width:24px;height:24px;object-fit:contain;vertical-align:middle;margin-right:6px;border-radius:50%;opacity:0.9;">IDIOTS <span>W/</span> KNIFES</a>
+      <a class="back" href="/">← back</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap codes-inner">
+      <h1 class="hand">codes.</h1>
+      <p id="codes-sub">pull a code below. use it before it's gone.</p>
+      <div class="code-box" id="code-box">loading…</div>
+      <button class="reroll-btn" id="reroll" hidden type="button">get another</button>
+    </div>
+  </main>
+
+  <script>
+    (function(){
+      // codes stop being handed out after this date
+      var CUTOFF = new Date('2026-11-01T00:00:00');
+
+      var box = document.getElementById('code-box');
+      var sub = document.getElementById('codes-sub');
+      var reroll = document.getElementById('reroll');
+
+      function showUnavailable(){
+        box.textContent = 'not available';
+        box.classList.add('unavailable');
+        sub.textContent = 'the code drop has ended.';
+      }
+
+      if(new Date() >= CUTOFF){
+        showUnavailable();
+        return;
+      }
+
+      fetch('/codes.txt', { cache: 'no-store' })
+        .then(function(r){ return r.ok ? r.text() : ''; })
+        .then(function(txt){
+          var codes = txt.split('\n')
+            .map(function(l){ return l.trim(); })
+            .filter(function(l){ return l && l[0] !== '#'; });
+
+          if(!codes.length){
+            showUnavailable();
+            return;
+          }
+
+          function pick(){
+            box.textContent = codes[Math.floor(Math.random() * codes.length)];
+          }
+          pick();
+          reroll.hidden = false;
+          reroll.addEventListener('click', pick);
+        })
+        .catch(function(){ showUnavailable(); });
+    })();
+  </script>
+
+</body>
+</html>

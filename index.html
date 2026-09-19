@@ -40,6 +40,46 @@
 
   .wrap{ max-width: 980px; margin: 0 auto; padding: 0 24px; }
 
+  /* BANNER */
+  .site-banner{
+    background: var(--red);
+    color: var(--white);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px 44px 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #000;
+    position: relative;
+  }
+  .site-banner a{
+    text-decoration: underline;
+    color: var(--white);
+    white-space: nowrap;
+  }
+  .site-banner a:hover{ opacity: 0.8; }
+  .site-banner .banner-close{
+    position: absolute;
+    right: 14px; top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 1px solid rgba(240,240,240,0.5);
+    color: var(--white);
+    font-family: inherit;
+    font-size: 0.75rem;
+    line-height: 1;
+    width: 20px; height: 20px;
+    cursor: pointer;
+    padding: 0;
+  }
+  .site-banner .banner-close:hover{ border-color: var(--white); }
+
   /* NAV */
   .nav{
     padding: 0;
@@ -317,10 +357,17 @@
     .crew-card{ border-right: none; border-bottom: 1px solid var(--border); }
     .log-entry{ grid-template-columns: 1fr; gap: 4px; }
     .nav-links{ display:none; }
+    .site-banner{ padding-right: 40px; }
   }
 </style>
 </head>
 <body>
+
+  <div class="site-banner" id="site-banner" hidden>
+    <span id="banner-text"></span>
+    <a href="/codes/">get a code →</a>
+    <button class="banner-close" id="banner-close" aria-label="dismiss banner" type="button">×</button>
+  </div>
 
   <nav class="nav">
     <div class="nav-inner">
@@ -474,6 +521,33 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function(){
+      var el = document.getElementById('site-banner');
+      var textEl = document.getElementById('banner-text');
+      var closeBtn = document.getElementById('banner-close');
+
+      fetch('/banner.txt', { cache: 'no-store' })
+        .then(function(r){ return r.ok ? r.text() : ''; })
+        .then(function(txt){
+          txt = txt.trim();
+          if(!txt) return;
+
+          var dismissKey = 'iwk-banner-dismissed:' + txt;
+          if(sessionStorage.getItem(dismissKey)) return;
+
+          textEl.textContent = txt;
+          el.hidden = false;
+
+          closeBtn.addEventListener('click', function(){
+            el.hidden = true;
+            try{ sessionStorage.setItem(dismissKey, '1'); }catch(e){}
+          });
+        })
+        .catch(function(){ /* no banner.txt yet, say nothing */ });
+    })();
+  </script>
 
 </body>
 </html>
