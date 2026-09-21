@@ -1,0 +1,13 @@
+# NEWSLETTER — edit this from your phone or PC (e.g. right in GitHub's web editor).
+# One entry per block: first line is the date/label, second line is the update text.
+# Leave one FULLY BLANK line between entries.
+# Put new entries at the TOP — the homepage shows the 3 newest, /newsletter/ shows all of them.
+
+sept 2026
+Gunners Rewritten is officially a bigger job than we thought. rebuilding the whole gun system from scratch. it's fine. everything's fine.
+
+aug 11, 2026
+pushed an update to Slime Knight. still no hands, still no arms, still bouncing.
+
+earlier
+made ping in 3 hours because someone said we couldn't. we could.
