@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slime Knight: Gunners. — Idiots With Knifes</title>
+<meta name="description" content="Slime Knight: Gunners. — a knight finds a gun. fluid platforming, endless shooting, upgrade table for when you get cornered. From Idiots With Knifes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Kalam:wght@400;700&family=Permanent+Marker&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0a0a;
+    --bg2: #111;
+    --bg3: #1a1a1a;
+    --white: #f0f0f0;
+    --grey: #888;
+    --grey-dark: #444;
+    --red: #e00;
+    --border: #2a2a2a;
+    --card: #141414;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  h1,h2,h3{ margin:0; }
+  a{ color: inherit; }
+  :focus-visible{ outline: 2px solid var(--white); outline-offset: 3px; }
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 24px; }
+
+  .nav{ padding: 0; border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top:0; z-index:50; }
+  .nav-inner{ max-width: 980px; margin:0 auto; padding: 18px 24px; display:flex; align-items:center; justify-content: space-between; }
+  .nav-brand{ font-family:'Space Mono', monospace; font-weight: 700; font-size: 0.9rem; letter-spacing: 0.04em; text-transform: uppercase; text-decoration: none; }
+  .nav-brand span{ color: var(--red); }
+  .nav-links{ display:flex; gap: 28px; list-style:none; margin:0; padding:0; }
+  .nav-links a{ text-decoration:none; font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--grey); }
+  .nav-links a:hover{ color: var(--white); }
+
+  .hero{ border-bottom: 1px solid var(--border); padding: 90px 24px 70px; }
+  .hero-inner{ max-width: 900px; margin: 0 auto; display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items: center; }
+  .hero-shot{ width:100%; aspect-ratio: 315/250; object-fit: cover; border: 1px solid var(--border); display:block; }
+  .eyebrow{ font-size: 0.72rem; color: var(--grey-dark); letter-spacing: 0.06em; margin-bottom: 14px; }
+  .eyebrow a{ text-decoration: underline; color: var(--grey-dark); }
+  .eyebrow a:hover{ color: var(--grey); }
+  .hero h1{ font-family:'Permanent Marker', cursive; font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; color: var(--white); margin-bottom: 18px; }
+  .hero h1 .red{ color: var(--red); }
+  .hero-tag{ font-size: 0.9rem; color: var(--grey); max-width: 46ch; margin: 0 0 28px; line-height: 1.7; }
+  .badge-row{ display:flex; gap: 8px; flex-wrap:wrap; margin-bottom: 32px; }
+  .badge-row span{ font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; border: 1px solid var(--grey-dark); color: var(--grey); padding: 5px 10px; }
+  .cta-row{ display:flex; gap: 12px; flex-wrap: wrap; }
+  .btn{ text-decoration:none; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 12px 22px; display:inline-block; transition: border-color 0.15s, color 0.15s, background 0.15s; }
+  .btn-primary{ background: var(--red); border: 1px solid var(--red); color: var(--white); }
+  .btn-primary:hover{ background: #c00; border-color: #c00; }
+  .btn-ghost{ border: 1px solid var(--grey-dark); color: var(--grey); }
+  .btn-ghost:hover{ border-color: var(--white); color: var(--white); }
+
+  section{ padding: 64px 24px; border-bottom: 1px solid var(--border); }
+  .section-inner{ max-width: 640px; margin: 0 auto; }
+  section h2{ font-family:'Permanent Marker', cursive; font-size: clamp(1.3rem, 3vw, 1.7rem); margin-bottom: 18px; }
+  section p{ color: var(--grey); margin: 0 0 14px; }
+  section p:last-child{ margin-bottom: 0; }
+
+  .features{ list-style:none; margin:0; padding:0; display:grid; gap: 1px; border: 1px solid var(--border); }
+  .features li{ background: var(--card); padding: 18px 20px; font-size: 0.85rem; color: var(--grey); display:flex; gap: 14px; align-items:flex-start; }
+  .features li::before{ content: "◆"; color: var(--red); font-size: 0.7rem; margin-top: 3px; flex-shrink:0; }
+
+  .crew-strip{ display:flex; flex-wrap:wrap; gap: 24px; }
+  .crew-strip div{ font-size: 0.82rem; color: var(--grey); }
+  .crew-strip strong{ display:block; color: var(--white); font-size: 0.85rem; letter-spacing:0.03em; margin-bottom: 2px; }
+
+  .contact{ padding: 64px 24px 40px; text-align:left; border-bottom:none; }
+  .foot-bottom{ font-size: 0.72rem; color: var(--grey-dark); border-top: 1px solid var(--border); padding-top: 24px; margin-top: 40px; letter-spacing: 0.03em; }
+
+  @media (max-width: 680px){
+    .hero-inner{ grid-template-columns: 1fr; }
+    .nav-links{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-brand" href="/">IDIOTS <span>W/</span> KNIFES</a>
+      <ul class="nav-links">
+        <li><a href="/#games">games</a></li>
+        <li><a href="/#devlog">devlog</a></li>
+        <li><a href="/#crew">crew</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow"><a href="/#games">← back to the games</a></div>
+        <h1>SLIME KNIGHT: <span class="red">GUNNERS.</span></h1>
+        <p class="hero-tag">a knight finds a gun. fluid platforming, endless shooting, and an upgrade table for when you get cornered. built at GLG Gaming Camp.</p>
+        <div class="badge-row">
+          <span>godot</span>
+          <span>shooter</span>
+          <span>out now</span>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="https://idiots-with-knifes.itch.io/skg">play on itch.io</a>
+          <a class="btn btn-ghost" href="/#games">more games</a>
+        </div>
+      </div>
+      <img class="hero-shot" src="https://img.itch.zone/aW1nLzI4OTM5Mjg0LnBuZw==/315x250%23c/Sv424M.png" alt="Slime Knight: Gunners. cover art" loading="lazy">
+    </div>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="section-inner">
+        <h2>what it is</h2>
+        <p>the knight from Slime Knight finds a gun, and the whole game changes shape around it. Gunners keeps the fluid platforming and adds endless waves of shooting on top — when it gets rough, there's an upgrade table waiting.</p>
+        <p>it started life at GLG Gaming Camp and grew from there into a full release.</p>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="section-inner">
+        <h2>what's in it</h2>
+        <ul class="features">
+          <li>fluid platforming carried over from Slime Knight</li>
+          <li>endless shooting waves that don't let up</li>
+          <li>an upgrade table for when you get cornered</li>
+          <li>built at GLG Gaming Camp, then finished properly</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="section-inner">
+        <h2>made by</h2>
+        <div class="crew-strip">
+          <div><strong>Liver B</strong>main dev · artist · game dev</div>
+          <div><strong>Mr.Pringle</strong>exclusive playtester · artist</div>
+          <div><strong>Atomic_Bomb</strong>secondary artist</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="contact">
+    <div class="wrap">
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://idiots-with-knifes.itch.io/skg">play on itch.io</a>
+        <a class="btn btn-ghost" href="/">back to idiots with knifes</a>
+      </div>
+      <div class="foot-bottom">
+        made with love, caffeine, and bad decisions. © 2026 idiots with knifes.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
