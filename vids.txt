@@ -1,0 +1,5 @@
+# vids.txt — one video per line:
+# path-or-url | Title | Description (optional) | Poster image (optional)
+# Lines starting with # are ignored.
+
+/videos/example.mp4 | Example Video | Replace this line with your own videos
