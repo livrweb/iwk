@@ -79,6 +79,21 @@
     opacity: 0.9;
   }
 
+  /* BANNER */
+  .banner{
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--grey);
+  }
+  .banner a{
+    text-decoration: underline;
+    color: var(--white);
+  }
+  .banner a:hover{ color: var(--red); }
+
   /* HERO */
   .hero{
     border-bottom: 1px solid var(--border);
@@ -341,6 +356,66 @@
     letter-spacing: 0.03em;
   }
 
+  /* NEWSLETTER */
+  .newsletter{
+    padding: 80px 24px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+  }
+  .newsletter-inner{
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .newsletter h2{
+    font-family:'Permanent Marker', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+  }
+  .newsletter p{
+    color: var(--grey);
+    font-size: 0.85rem;
+    margin: 0 0 24px;
+    line-height: 1.6;
+  }
+  .newsletter-form{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .newsletter-form input{
+    flex: 1;
+    min-width: 200px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--white);
+    padding: 11px 14px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+  }
+  .newsletter-form input::placeholder{
+    color: var(--grey-dark);
+  }
+  .newsletter-form input:focus{
+    outline: none;
+    border-color: var(--red);
+  }
+  .newsletter-form button{
+    background: var(--red);
+    border: 1px solid var(--red);
+    color: var(--white);
+    padding: 11px 22px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .newsletter-form button:hover{
+    background: #c00;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 680px){
     .games-grid{ grid-template-columns: 1fr; }
@@ -352,6 +427,8 @@
 </style>
 </head>
 <body>
+
+  <div class="banner" id="banner"></div>
 
   <nav class="nav">
     <div class="nav-inner">
@@ -505,6 +582,17 @@
         </div>
       </div>
     </section>
+
+    <section class="newsletter" id="newsletter">
+      <div class="newsletter-inner">
+        <h2>stay posted</h2>
+        <p>updates when we ship something. no spam, just games.</p>
+        <form class="newsletter-form" action="https://buttondown.email/api/emails/embed-subscribe/idiotswithknifes" method="post">
+          <input type="email" name="email" placeholder="your email" required>
+          <button type="submit">subscribe</button>
+        </form>
+      </div>
+    </section>
   </main>
 
   <footer class="contact" id="contact">
@@ -522,6 +610,24 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Load banner from banner.txt
+    fetch('/banner.txt')
+      .then(response => response.text())
+      .then(text => {
+        const banner = document.getElementById('banner');
+        if (text.trim()) {
+          banner.innerHTML = text;
+          banner.style.display = 'block';
+        } else {
+          banner.style.display = 'none';
+        }
+      })
+      .catch(() => {
+        document.getElementById('banner').style.display = 'none';
+      });
+  </script>
 
 </body>
 </html>
