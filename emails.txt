@@ -2,6 +2,9 @@
 # Source: https://buttondown.com/idiotswithknifes/rss?count=100
 # Do not edit by hand — this file is overwritten on every sync.
 
+Oct 26, 2026
+bout that outage — im sure youve seen everything fall9ibng and being out this enclouds pip, docker. we use pip for the site and we use docker for smth special (soon) we fell vivt em to thet andf the site is back online. (read: https://buttondown.com/idiotswithknifes/archive/bout-that-outage/)
+
 Oct 6, 2026
 Play Store and 10000 Views!! — Hello everyone!! We just hit 10000 views on our website! email from cloudflare saying congratulations for surpassing 10000 views And we are officially on the Google Play Store!! Check out the (not) complete game for 5$ on the play store this not only helps us make more levels and… (read: https://buttondown.com/idiotswithknifes/archive/play-store-and-10000-views/)
 
