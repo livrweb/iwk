@@ -2,6 +2,9 @@
 # Source: https://buttondown.com/idiotswithknifes/rss?count=100
 # Do not edit by hand — this file is overwritten on every sync.
 
+Oct 31, 2026
+spooke — its spooky and look for slime knight update 2.0 soon it will have multiplayer. it will be epic gamer. it might have lore. it won't have more levels until later. (read: https://buttondown.com/idiotswithknifes/archive/spooke/)
+
 Oct 26, 2026
 bout that outage — im sure youve seen everything fall9ibng and being out this enclouds pip, docker. we use pip for the site and we use docker for smth special (soon) we fell vivt em to thet andf the site is back online. (read: https://buttondown.com/idiotswithknifes/archive/bout-that-outage/)
 
